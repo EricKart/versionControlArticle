@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering Version Control: From Basics to Advanced</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        .prose {
+            max-width: 80ch;
+        }
+        .prose h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .prose h2 {
+            font-size: 1.75rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .prose h3 {
+            font-size: 1.25rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .prose p, .prose li {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: #4b5563;
+        }
+        .prose a {
+            color: #4f46e5;
+            text-decoration: none;
+        }
+        .prose a:hover {
+            text-decoration: underline;
+        }
+        .code-block-wrapper {
+            background-color: #1f2937;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .code-block-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: #374151;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.875rem;
+            color: #d1d5db;
+        }
+        .code-block-header .lang {
+            font-weight: 500;
+        }
+        .code-block-wrapper pre {
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        .code-block-wrapper code {
+            font-family: 'Fira Code', monospace;
+            color: #e5e7eb;
+            font-size: 0.875rem;
+        }
+        .copy-btn {
+            background-color: #4b5563;
+            color: #e5e7eb;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background-color 0.2s;
+        }
+        .copy-btn:hover {
+            background-color: #6b7280;
+        }
+        .copy-btn.copied {
+            background-color: #10b981;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <main class="prose prose-indigo mx-auto p-8">
+        <h1>Mastering Version Control: From Basics to Advanced</h1>
+
+        <section id="what-is-vcs">
+            <h2>1. What is Version Control? (And Why You Can't Live Without It)</h2>
+            <p>
+                Imagine you're writing a complex story. You write a few chapters, then decide to change the plot. You delete a character, rewrite a chapter, but then realize your original idea was better. How do you get it back? If you didn't save a separate copy, you might be out of luck.
+            </p>
+            <p>
+                Now, imagine you're working on that same story with a friend. You're both editing the same file. You accidentally save over your friend's changes, and they do the same to yours. Chaos ensues.
+            </p>
+            <p>
+                This is where a <strong>Version Control System (VCS)</strong> comes in. A VCS is a tool that tracks and manages changes to a set of files over time. It's like a time machine for your project, allowing you to:
+            </p>
+            <ul>
+                <li><strong>Track every change:</strong> A VCS records every modification, who made it, and when.</li>
+                <li><strong>Revert to previous versions:</strong> If you make a mistake, you can easily "rewind" your project to an earlier state.</li>
+                <li><strong>Collaborate seamlessly:</strong> It provides a structured way for multiple people to work on the same project without interfering with each other's work.</li>
+                <li><strong>Understand project history:</strong> It creates a historical log of the project's evolution, which is invaluable for debugging and understanding how the project has changed.</li>
+            </ul>
+        </section>
+
+        <section id="types-of-vcs">
+            <h2>2. Types of Version Control Systems</h2>
+            <p>There are two main types of version control systems:</p>
+            <ul>
+                <li><strong>Centralized Version Control Systems (CVCS):</strong> In a CVCS, there is a single central server that contains all versions of the project's files. Developers "check out" files from this central server to work on them and then "check in" their changes.</li>
+                <li><strong>Distributed Version Control Systems (DVCS):</strong> In a DVCS, every developer has a full copy of the entire project history on their local machine. This copy is called a <strong>repository</strong>.</li>
+            </ul>
+            <p><strong>Git</strong> is the de facto standard for version control today, and it will be the focus of this guide.</p>
+        </section>
+
+        <section id="getting-started">
+            <h2>3. Getting Started with Git</h2>
+            <h3>First-Time Configuration</h3>
+            <p>Once Git is installed, you should perform a one-time configuration to tell Git who you are. This information is attached to every change you make.</p>
+            <div class="code-block-wrapper">
+                <div class="code-block-header">
+                    <span class="lang">bash</span>
+                    <button class="copy-btn">Copy</button>
+                </div>
+                <pre><code class="language-bash">git config --global user.name "Your Name"
+git config --global user.email "youremail@example.com"</code></pre>
+            </div>
+        </section>
+
+        <section id="core-concepts">
+            <h2>4. Core Git Concepts: The Foundation</h2>
+            <h3>The Basic Git Workflow</h3>
+            <p>The fundamental Git workflow looks like this:</p>
+            <ol>
+                <li>You <strong>modify</strong> files in your working directory.</li>
+                <li>You selectively <strong>stage</strong> the changes you want to include in your next commit.</li>
+                <li>You <strong>commit</strong> the staged changes, which permanently stores that snapshot of the project in your Git history.</li>
+            </ol>
+            <h3>Essential Commands</h3>
+            <p><strong>Initialize a Repository:</strong></p>
+            <div class="code-block-wrapper">
+                <div class="code-block-header"><span class="lang">bash</span><button class="copy-btn">Copy</button></div>
+                <pre><code class="language-bash">git init</code></pre>
+            </div>
+            <p><strong>Check the Status:</strong></p>
+            <div class="code-block-wrapper">
+                <div class="code-block-header"><span class="lang">bash</span><button class="copy-btn">Copy</button></div>
+                <pre><code class="language-bash">git status</code></pre>
+            </div>
+            <p><strong>Stage Changes:</strong></p>
+            <div class="code-block-wrapper">
+                <div class="code-block-header"><span class="lang">bash</span><button class="copy-btn">Copy</button></div>
+                <pre><code class="language-bash"># Stage a specific file
+git add filename.txt
+
+# Stage all changes
+git add .</code></pre>
+            </div>
+            <p><strong>Commit Changes:</strong></p>
+            <div class="code-block-wrapper">
+                <div class="code-block-header"><span class="lang">bash</span><button class="copy-btn">Copy</button></div>
+                <pre><code class="language-bash">git commit -m "Add initial project files"</code></pre>
+            </div>
+            <p><strong>View History:</strong></p>
+            <div class="code-block-wrapper">
+                <div class="code-block-header"><span class="lang">bash</span><button class="copy-btn">Copy</button></div>
+                <pre><code class="language-bash">git log</code></pre>
+            </div>
+        </section>
+
+        <section id="branching">
+            <h2>5. Branching: Parallel Universes for Your Code</h2>
+            <p>Branching creates an isolated environment. You can work freely on a new feature branch without affecting the stable <code>main</code> branch.</p>
+            <h3>Branching Commands</h3>
+            <div class="code-block-wrapper">
+                <div class="code-block-header"><span class="lang">bash</span><button class="copy-btn">Copy</button></div>
+                <pre><code class="language-bash"># Create a new branch
+git branch new-feature
+
+# Switch to the new branch
+git checkout new-feature
+
+# Create and switch in one command
+git checkout -b another-feature
+
+# List all branches
+git branch</code></pre>
+            </div>
+        </section>
+
+        <section id="merging">
+            <h2>6. Merging: Bringing It All Together</h2>
+            <p>Once your work on a feature branch is complete, you incorporate those changes back into your <code>main</code> branch. This is called <strong>merging</strong>.</p>
+            <div class="code-block-wrapper">
+                <div class="code-block-header"><span class="lang">bash</span><button class="copy-btn">Copy</button></div>
+                <pre><code class="language-bash"># Switch back to the main branch
+git checkout main
+
+# Merge the feature branch into main
+git merge new-feature</code></pre>
+            </div>
+            <h3>Merge Conflicts</h3>
+            <p>A <strong>merge conflict</strong> occurs when changes have been made to the same line of the same file on different branches. Git will pause and ask you to resolve it manually by editing the conflicted files to remove the conflict markers (<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>) and then committing the result.</p>
+        </section>
+
+        <section id="remotes">
+            <h2>7. Working with Remote Repositories</h2>
+            <p>A remote repository is a version of your project hosted on the internet (e.g., on GitHub). This is how you collaborate and back up your work.</p>
+            <div class="code-block-wrapper">
+                <div class="code-block-header"><span class="lang">bash</span><button class="copy-btn">Copy</button></div>
+                <pre><code class="language-bash"># Clone an existing repository
+git clone https://github.com/example/repo.git
+
+# Add a remote to a local repository
+git remote add origin https://github.com/user/repo.git
+
+# Push your changes to the remote
+git push origin main
+
+# Pull changes from the remote
+git pull origin main</code></pre>
+            </div>
+        </section>
+
+        <section id="advanced">
+            <h2>8. Advanced Techniques and Utilities</h2>
+            <h3><code>git stash</code>: Saving Changes for Later</h3>
+            <p>Use <code>git stash</code> when you need to quickly switch branches but your current work isn't ready for a commit.</p>
+            <div class="code-block-wrapper">
+                <div class="code-block-header"><span class="lang">bash</span><button class="copy-btn">Copy</button></div>
+                <pre><code class="language-bash"># Stash your current changes
+git stash
+
+# List your stashes
+git stash list
+
+# Re-apply the last stash and remove it from the list
+git stash pop</code></pre>
+            </div>
+            <h3><code>git rebase</code>: Creating a Cleaner History</h3>
+            <p>Rebase rewrites history to be linear. <strong>The Golden Rule: Never rebase a branch that has been pushed and is used by others.</strong></p>
+            <div class="code-block-wrapper">
+                <div class="code-block-header"><span class="lang">bash</span><button class="copy-btn">Copy</button></div>
+                <pre><code class="language-bash"># Rebase your current branch onto main
+git rebase main</code></pre>
+            </div>
+            <h3><code>git reset</code>: Undoing Commits (Use with Caution)</h3>
+            <div class="code-block-wrapper">
+                <div class="code-block-header"><span class="lang">bash</span><button class="copy-btn">Copy</button></div>
+                <pre><code class="language-bash"># Move HEAD back, keep changes in staging area
+git reset --soft HEAD~1
+
+# Move HEAD back, keep changes in working directory
+git reset --mixed HEAD~1
+
+# DANGEROUS: Move HEAD back, discard all changes
+git reset --hard HEAD~1</code></pre>
+            </div>
+        </section>
+        
+        <section id="workflows">
+            <h2>9. Collaborative Workflows: Pull Requests</h2>
+            <p>The <strong>Pull Request (PR)</strong> is the heart of modern collaboration. It's a formal way to propose changes, encouraging code review and discussion before they are merged into the main codebase.</p>
+        </section>
+
+        <section id="conclusion">
+            <h2>10. Conclusion: Git Best Practices</h2>
+            <ul>
+                <li><strong>Commit Often, Perfect Later:</strong> Make small, logical commits frequently.</li>
+                <li><strong>Write Clear Commit Messages:</strong> Explain <em>why</em> a change was made.</li>
+                <li><strong>Branch for Everything:</strong> Never work directly on the <code>main</code> branch.</li>
+                <li><strong>Embrace Pull Requests:</strong> Use them for all changes to shared branches.</li>
+                <li><strong>Don't Rewrite Public History:</strong> Only rebase local branches you haven't shared.</li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        const copyButtons = document.querySelectorAll('.copy-btn');
+
+        copyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const wrapper = button.closest('.code-block-wrapper');
+                const code = wrapper.querySelector('code');
+                const textToCopy = code.innerText;
+
+                // Create a temporary textarea to hold the text
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    button.textContent = 'Copied!';
+                    button.classList.add('copied');
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                    button.textContent = 'Error';
+                }
+                document.body.removeChild(textArea);
+
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        });
+    </script>
+
+</body>
+</html>
